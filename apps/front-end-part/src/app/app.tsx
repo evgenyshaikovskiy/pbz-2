@@ -5,23 +5,20 @@ import AppButton from '../components/button';
 import OwnerForm from '../components/crud/owners_create';
 import AppInput from '../components/input';
 import AppModal from '../components/modal';
+import CreateCarButton from '../components/utils/add_car_button';
+import CreateEmployeesButton from '../components/utils/add_employees_button';
+import CreateInspectionButton from '../components/utils/add_inspection_button';
+import CreateOwnerButton from '../components/utils/add_owner_button';
 import '../styles/app.css';
 
 
 export function App() {
-  const [modal, setModal] = useState(false);
-
-  const createOwner = (eas: any) => {
-    console.log(eas);
-    setModal(false);
-  }
-
   return <div className="app">
-    <AppButton onClick={() => setModal(true)}>Click me</AppButton>
-    <AppModal visible={modal} setVisible={setModal}>
-      <OwnerForm create={createOwner}></OwnerForm>
-    </AppModal>
-    <AppInput></AppInput>
+    <CreateCarButton></CreateCarButton>
+    <CreateOwnerButton></CreateOwnerButton>
+    <CreateEmployeesButton></CreateEmployeesButton>
+    <CreateInspectionButton></CreateInspectionButton>
+
   </div>;
 }
 

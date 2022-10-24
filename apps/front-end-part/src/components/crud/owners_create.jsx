@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import AppButton from '../button';
 import AppInput from '../input';
 import AppSelect from '../select';
-import './owners.css';
+import './creation.css'
 
 const OwnerForm = ({ create }) => {
   const [owner, setOwner] = useState({
@@ -34,7 +34,7 @@ const OwnerForm = ({ create }) => {
   };
 
   return (
-    <form className="create_owner">
+    <form className="create_form">
       <AppInput
         value={owner.full_name}
         type="text"
@@ -79,7 +79,7 @@ const OwnerForm = ({ create }) => {
         ]}
       ></AppSelect>
 
-      <AppButton onClick={addNewOwner}>Создать</AppButton>
+      <AppButton onClick={addNewOwner}>Добавить</AppButton>
     </form>
   );
 };
