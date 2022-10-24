@@ -1,0 +1,10 @@
+.appBtn {
+  padding: 5px 15px;
+  margin-top: 10px;
+  font-size: 14px;
+  background: transparent;
+  border-radius: 4px;
+  border: 2px solid deepskyblue;
+  cursor: pointer;
+  background-color: lightblue;
+}
