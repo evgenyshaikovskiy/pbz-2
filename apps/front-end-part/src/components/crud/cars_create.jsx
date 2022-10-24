@@ -46,7 +46,7 @@ const CarsForm = ({ create }) => {
       <AppInput
         value={car.color}
         type="text"
-        onChange={(e) => setCar({ ...car, car: e.target.value })}
+        onChange={(e) => setCar({ ...car, color: e.target.value })}
         placeholder="Цвет автомобиля"
       ></AppInput>
       <AppInput

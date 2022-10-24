@@ -6,6 +6,30 @@ export class AppService {
     this.load();
   }
 
+  public async getAllEmployees() {
+    const query = await this.connection.query('SELECT * FROM employees;');
+    return query;
+  }
+
+  public async getAllInspections() {
+    const query = await this.connection.query('SELECT * FROM inspections;');
+    return query;
+  }
+
+  public async getAllOwners() {
+    const query = await this.connection.query('SELECT * FROM owners;');
+    return query;
+  }
+
+  public async getAllCars() {
+    const query = await this.connection.query('SELECT * FROM cars;');
+    return query;
+  }
+  public async addEmployee(employee) {
+    const query = await this.connection.query(``);
+    return query;
+  }
+
   private async load() {
     try {
       const query = await this.connection.query(
