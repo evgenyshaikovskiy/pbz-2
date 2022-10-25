@@ -1,5 +1,6 @@
 import { Controller, Get, Post, Req } from '@nestjs/common';
 import { AppService } from '../app.service';
+import { Employee } from '../model/employee';
 
 @Controller('employees')
 export class EmployeeController {
@@ -13,6 +14,8 @@ export class EmployeeController {
 
   @Post()
   create(@Req() request: Request) {
-    console.log(request.body);
+    const employee: Employee = request.body as unknown as Employee;
+    this.appService.addEmployee(employee);
+    return request;
   }
 }

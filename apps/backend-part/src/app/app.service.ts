@@ -1,5 +1,9 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { PG_CONNECTION } from '../constants';
+import { Car } from './model/car.model';
+import { Employee } from './model/employee';
+import { Inspection } from './model/inspection';
+import { Owner } from './model/owner.model';
 @Injectable()
 export class AppService {
   constructor(@Inject(PG_CONNECTION) private connection: any) {
@@ -25,8 +29,37 @@ export class AppService {
     const query = await this.connection.query('SELECT * FROM cars;');
     return query;
   }
-  public async addEmployee(employee) {
-    const query = await this.connection.query(``);
+
+  public async addEmployee(employee: Employee) {
+    const query = await this.connection.query(`
+      INSERT INTO employees(full_name, position) VALUES('${employee.full_name}', '${employee.position}')`);
+    return query;
+  }
+
+  public async addOwner(owner: Owner) {
+    const query = await this.connection.query(`
+      INSERT INTO owners(full_name, driving_license_number, address, year_of_birth, sex)
+        VALUES('${owner.full_name}', '${owner.driving_license_number}', '${owner.address}', '${owner.year_of_birth}', '${owner.sex}');`);
+
+    return query;
+  }
+
+  public async addCar(car: Car) {
+    const query = await this.connection.query(`
+      INSERT INTO cars(plate_number, engine_number, color, brand, owner_id)
+        VALUES('${car.plate_number}', '${car.engine_number}', '${car.color}', '${car.brand}',
+          (SELECT id FROM owners WHERE owners.full_name = '${car.owner_full_name}'));
+    `);
+
+    return query;
+  }
+
+  public async addInspection(inspection: Inspection) {
+    const query = await this.connection.query(`
+      INSERT INTO inspections(car_id, employee_id, inspection_result) VALUES(
+        (SELECT id FROM cars WHERE cars.plate_number = '${inspection.car_plate_number}'),
+        (SELECT id FROM employees WHERE employees.full_name = '${inspection.employee_full_name}')
+      );`);
     return query;
   }
 

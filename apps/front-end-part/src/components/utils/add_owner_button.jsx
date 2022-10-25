@@ -8,8 +8,10 @@ export function CreateOwnerButton() {
   const [modal, setModal] = useState(false);
 
   const createOwner = async (owner) => {
-    owner.auto_number_plates = owner.auto_number_plates.split(';');
-    const response = await PostService.post('http://localhost:3000/api/owners');
+    const response = await PostService.post(
+      'http://localhost:3000/api/owners',
+      owner
+    );
 
     console.log(response);
     setModal(false);

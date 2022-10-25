@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import AppButton from '../button';
 import AppInput from '../input';
 import AppSelect from '../select';
-import './creation.css'
+import './creation.css';
 
 const OwnerForm = ({ create }) => {
   const [owner, setOwner] = useState({
@@ -11,7 +11,6 @@ const OwnerForm = ({ create }) => {
     address: '',
     year_of_birth: '',
     sex: '',
-    auto_number_plates: '',
     // auto number plate??
   });
 
@@ -29,7 +28,6 @@ const OwnerForm = ({ create }) => {
       address: '',
       year_of_birth: '',
       sex: 'Пол',
-      auto_number_plates: '',
     });
   };
 
@@ -60,14 +58,6 @@ const OwnerForm = ({ create }) => {
         type="text"
         onChange={(e) => setOwner({ ...owner, year_of_birth: e.target.value })}
         placeholder="Год рождения"
-      ></AppInput>
-      <AppInput
-        value={owner.auto_number_plates}
-        type="text"
-        onChange={(e) =>
-          setOwner({ ...owner, auto_number_plates: e.target.value })
-        }
-        placeholder="Номер авто (через точку с запятой)"
       ></AppInput>
       <AppSelect
         value={owner.sex}

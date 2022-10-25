@@ -3,9 +3,8 @@ import PostService from '../api/post.service';
 
 
 function Employees() {
-  const answer = PostService.get('http://localhost:3000/api/employees');
+  // const answer = PostService.get('http://localhost:3000/api/employees');
 
-  console.log(answer);
   return (
     <div>
       <h1>There are all employees.</h1>

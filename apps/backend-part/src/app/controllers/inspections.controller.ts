@@ -1,5 +1,6 @@
 import { Controller, Get, Post, Req } from '@nestjs/common';
 import { AppService } from '../app.service';
+import { Inspection } from '../model/inspection';
 
 @Controller('inspections')
 export class InspectionsController {
@@ -13,6 +14,8 @@ export class InspectionsController {
 
   @Post()
   create(@Req() request: Request) {
-    console.log(request.body);
+    const inspection: Inspection = request.body as unknown as Inspection;
+    this.appService.addInspection(inspection);
+    return request;
   }
 }

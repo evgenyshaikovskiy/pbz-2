@@ -13,9 +13,8 @@ export class CarsController {
 
   @Post()
   create(@Req() request: Request) {
-    console.log(request.body);
     const car: Car = request.body as unknown as Car;
-
-    console.log(car);
+    this.appService.addCar(car);
+    return request;
   }
 }
