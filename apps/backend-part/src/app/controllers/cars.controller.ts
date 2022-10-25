@@ -1,5 +1,6 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post, Req } from '@nestjs/common';
 import { AppService } from '../app.service';
+import { Car } from '../model/car.model';
 
 @Controller('cars')
 export class CarsController {
@@ -7,7 +8,14 @@ export class CarsController {
   @Get()
   getAll() {
     const res = this.appService.getAllCars();
-    // eslint-disable-next-line no-debugger
     return res;
+  }
+
+  @Post()
+  create(@Req() request: Request) {
+    console.log(request.body);
+    const car: Car = request.body as unknown as Car;
+
+    console.log(car);
   }
 }

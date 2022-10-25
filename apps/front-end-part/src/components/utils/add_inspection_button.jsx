@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PostService from '../../api/post.service';
 import AppButton from '../button';
 import InspectionsForm from '../crud/inspections_create';
 import AppModal from '../modal';
@@ -6,8 +7,13 @@ import AppModal from '../modal';
 export function CreateInspectionButton() {
   const [modal, setModal] = useState(false);
 
-  const createInspection = (inspection) => {
-    console.log(inspection);
+  const createInspection = async (inspection) => {
+    const response = await PostService.post(
+      'https://localhost:3000/api/inspections',
+      inspection
+    );
+
+    console.log(response);
     setModal(false);
   };
 

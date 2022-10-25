@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post, Req } from '@nestjs/common';
 import { AppService } from '../app.service';
 
 @Controller('owners')
@@ -9,5 +9,10 @@ export class OwnersController {
     const res = this.appService.getAllOwners();
     // eslint-disable-next-line no-debugger
     return res;
+  }
+
+  @Post()
+  create(@Req() request: Request) {
+    console.log(request.body);
   }
 }
