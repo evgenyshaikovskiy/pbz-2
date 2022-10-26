@@ -66,10 +66,11 @@ export class AppService {
 
   public async addInspection(inspection: Inspection) {
     const query = await this.connection.query(`
-      INSERT INTO inspections(car_id, employee_id, inspection_result) VALUES(
+      INSERT INTO inspections(car_id, employee_id, inspection_result, date) VALUES(
         (SELECT id FROM cars WHERE cars.plate_number = '${inspection.car_plate_number}'),
-        (SELECT id FROM employees WHERE employees.full_name = '${inspection.employee_full_name}')
-      );`);
+        (SELECT id FROM employees WHERE employees.full_name = '${inspection.employee_full_name}'),
+        ${inspection.inspection_result}, ${inspection.date});`);
+
     return query;
   }
 
@@ -93,8 +94,47 @@ export class AppService {
     return query;
   }
 
+  public async updateCarById(id: number, car: Car) {
+    const query = await this.connection.query(`
+      UPDATE cars
+      SET plate_number='${car.plate_number}',
+          engine_number='${car.engine_number}',
+          color='${car.color}',
+          brand='${car.brand}',
+          owner_id='(SELECT id FROM owners WHERE owners.full_name='${car.owner_full_name}')'
+      WHERE id='${id}'`);
+
+    return query;
+  }
+
+  public async updateOwnerById(id: number, owner: Owner) {
+    const query = await this.connection.query(`
+      UPDATE owners
+        SET address='${owner.address}',
+        SET driving_license_number='${owner.driving_license_number}',
+        SET full_name='${owner.full_name}',
+        SET sex='${owner.sex}',
+        SET year_of_birth='${owner.year_of_birth}'
+      WHERE id='${id}'`);
+
+    return query;
+  }
+
+  public async updateInspectionById(id: number, inspection: Inspection) {
+    const query = await this.connection.query(`
+      UPDATE inspection
+        SET car_id='(SELECT id FROM cars WHERE cars.plate_number='${inspection.car_plate_number}')',
+        SET employee_id='(SELECT id FROM employees WHERE employees.full_name='${inspection.employee_full_name}')',
+        SET date='${inspection.date}',
+        SET inspection_result='${inspection.inspection_result}'
+      WHERE id='${id}'`);
+
+    return query;
+  }
+
   private async load() {
     try {
+      // maybe try cascade
       const query = await this.connection.query(
         `CREATE TABLE IF NOT EXISTS owners(
           id SERIAL PRIMARY KEY, full_name VARCHAR(80),
@@ -110,8 +150,10 @@ export class AppService {
         CREATE TABLE IF NOT EXISTS employees(id SERIAL PRIMARY KEY, full_name VARCHAR(80), position VARCHAR(50));
 
         CREATE TABLE IF NOT EXISTS inspections(
+          id SERIAL PRIMARY KEY,
           car_id INTEGER REFERENCES cars(id),
           employee_id INTEGER REFERENCES employees(id),
+          date TIMESTAMP,
           inspection_result VARCHAR(20)
         );
         `
