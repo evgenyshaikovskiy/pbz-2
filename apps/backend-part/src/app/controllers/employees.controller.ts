@@ -4,6 +4,7 @@ import { Employee } from '../model/employee';
 
 @Controller('employees')
 export class EmployeeController {
+  // TODO: proper answers for some requests
   constructor(private readonly appService: AppService) {}
   @Get()
   getAll() {
