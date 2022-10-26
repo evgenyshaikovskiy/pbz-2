@@ -8,6 +8,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: lightcyan;
 }
 
 .navbar {
@@ -28,4 +29,10 @@
   margin: 10px 10px 10px;
   color: rgb(141, 59, 0);
   padding: 10px 10px 10px;
+}
+
+.add_btns {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }

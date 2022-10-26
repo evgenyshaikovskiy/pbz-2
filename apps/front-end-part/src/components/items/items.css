@@ -1,0 +1,17 @@
+.item_container {
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  border: 1px solid lightslategray;
+  background-color: lightblue;
+}
+
+.item_content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+

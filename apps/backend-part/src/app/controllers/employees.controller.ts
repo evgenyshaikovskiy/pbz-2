@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Req } from '@nestjs/common';
+import { Controller, Delete, Get, Param, Post, Req } from '@nestjs/common';
 import { AppService } from '../app.service';
 import { Employee } from '../model/employee';
 
@@ -17,5 +17,10 @@ export class EmployeeController {
     const employee: Employee = request.body as unknown as Employee;
     this.appService.addEmployee(employee);
     return request;
+  }
+
+  @Delete(':id')
+  delete(@Param() params) {
+    this.appService.deleteFromRelationById(params.id, 'employees');
   }
 }

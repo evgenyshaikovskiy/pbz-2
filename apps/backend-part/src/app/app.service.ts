@@ -10,6 +10,7 @@ export class AppService {
     this.load();
   }
 
+  // get all functions
   public async getAllEmployees() {
     const query = await this.connection.query('SELECT * FROM employees;');
     return query;
@@ -30,6 +31,7 @@ export class AppService {
     return query;
   }
 
+  // add functions
   public async addEmployee(employee: Employee) {
     const query = await this.connection.query(`
       INSERT INTO employees(full_name, position) VALUES('${employee.full_name}', '${employee.position}')`);
@@ -63,12 +65,20 @@ export class AppService {
     return query;
   }
 
+  // delete functions
+  public async deleteFromRelationById(id: number, relationName: string) {
+    const query = await this.connection.query(
+      `DELETE FROM ${relationName} WHERE id='${id}'`
+    );
+    return query;
+  }
+
   private async load() {
     try {
       const query = await this.connection.query(
         `CREATE TABLE IF NOT EXISTS owners(
           id SERIAL PRIMARY KEY, full_name VARCHAR(80),
-          driving_license_number VARCHAR(10), address VARCHAR(20),
+          driving_license_number VARCHAR(10), address VARCHAR(50),
           year_of_birth VARCHAR(4), sex VARCHAR(1));
 
         CREATE TABLE IF NOT EXISTS cars(
@@ -77,7 +87,7 @@ export class AppService {
           brand VARCHAR(30),
           owner_id INTEGER REFERENCES owners(id));
 
-        CREATE TABLE IF NOT EXISTS employees(id SERIAL PRIMARY KEY, full_name VARCHAR(80), position VARCHAR(30));
+        CREATE TABLE IF NOT EXISTS employees(id SERIAL PRIMARY KEY, full_name VARCHAR(80), position VARCHAR(50));
 
         CREATE TABLE IF NOT EXISTS inspections(
           car_id INTEGER REFERENCES cars(id),

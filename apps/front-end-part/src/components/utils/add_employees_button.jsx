@@ -9,7 +9,7 @@ export function CreateEmployeesButton() {
 
   const createEmployee = async (employee) => {
     const response = await PostService.post(
-      'https://localhost:3000/api/employees',
+      'http://localhost:3000/api/employees',
       employee
     );
 

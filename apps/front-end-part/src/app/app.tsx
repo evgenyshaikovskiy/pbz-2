@@ -11,13 +11,7 @@ export function App() {
   // TODO: home page, separate router, post requests more routing
   return (
     <div className="app">
-      <div className="add_btns">
-        <ApplicationRouter></ApplicationRouter>
-        <CreateCarButton></CreateCarButton>
-        <CreateOwnerButton></CreateOwnerButton>
-        <CreateEmployeesButton></CreateEmployeesButton>
-        <CreateInspectionButton></CreateInspectionButton>
-      </div>
+      <ApplicationRouter></ApplicationRouter>
     </div>
   );
 }

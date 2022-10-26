@@ -1,13 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PostService from '../api/post.service';
-
+import EmployeeItem from '../components/items/employee';
 
 function Employees() {
-  // const answer = PostService.get('http://localhost:3000/api/employees');
+  const [employees, setEmployees] = useState([]);
+  const [isUpdated, setIsUpdated] = useState(false);
+
+  useEffect(() => {
+    const result = PostService.get('http://localhost:3000/api/employees');
+    result.then((values) => {
+      console.log('executeds');
+      setEmployees(values.data.rows);
+    });
+  }, [isUpdated]);
+
+  const removeEmployee = async (id) => {
+    const result = await PostService.delete(
+      `http://localhost:3000/api/employees/${id}`
+    );
+    console.log(result);
+    setIsUpdated(!isUpdated);
+  };
 
   return (
-    <div>
-      <h1>There are all employees.</h1>
+    <div className="employees_list">
+      <h1 style={{ textAlign: 'center', padding: '10px' }}>Список сотрудников</h1>
+      {employees.map((value) => {
+        return (
+          <EmployeeItem
+            employee={value}
+            key={value.id}
+            remove={removeEmployee}
+          ></EmployeeItem>
+        );
+      })}
     </div>
   );
 }

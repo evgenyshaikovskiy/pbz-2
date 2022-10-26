@@ -5,6 +5,7 @@ import Owners from '../../pages/owners';
 import Inspections from '../../pages/inspections';
 import Employees from '../../pages/employees';
 import '../../styles/app.css';
+import Home from '../../pages/home';
 
 function ApplicationRouter() {
   return (
@@ -28,7 +29,7 @@ function ApplicationRouter() {
           </li>
         </ul>
         <Routes>
-          <Route path="/"></Route>
+          <Route path="/" element={<Home />}></Route>
           <Route path="/owners" element={<Owners />}></Route>
           <Route path="/employees" element={<Employees />}></Route>
           <Route path="/cars" element={<Cars />}></Route>

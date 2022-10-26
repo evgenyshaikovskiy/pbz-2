@@ -9,7 +9,7 @@ export function CreateInspectionButton() {
 
   const createInspection = async (inspection) => {
     const response = await PostService.post(
-      'https://localhost:3000/api/inspections',
+      'http://localhost:3000/api/inspections',
       inspection
     );
 
