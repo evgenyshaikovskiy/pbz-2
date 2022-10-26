@@ -9,7 +9,16 @@ export default class PostService {
   static async post(url: string, obj: object) {
     try {
       const result = await axios.post(url, obj);
-      console.log(result.status);
+      return result;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  }
+
+  static async put(url: string, obj: object) {
+    try {
+      const result = await axios.put(url, obj);
       return result;
     } catch (error) {
       console.log(error);

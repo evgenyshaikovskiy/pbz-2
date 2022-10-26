@@ -2,13 +2,15 @@
   font-family: sans-serif;
   margin: 0;
   padding: 0;
+  background-color: lightcyan;
 }
 
 .app {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: lightcyan;
+  height: 100%;
+  width: 100%;
 }
 
 .navbar {

@@ -6,6 +6,7 @@ import Inspections from '../../pages/inspections';
 import Employees from '../../pages/employees';
 import '../../styles/app.css';
 import Home from '../../pages/home';
+import EmployeePage from '../single-pages/employeeSinglePage';
 
 function ApplicationRouter() {
   return (
@@ -34,6 +35,7 @@ function ApplicationRouter() {
           <Route path="/employees" element={<Employees />}></Route>
           <Route path="/cars" element={<Cars />}></Route>
           <Route path="/inspections" element={<Inspections />}></Route>
+          <Route path="/employees/:id" element={<EmployeePage />}></Route>
         </Routes>
       </BrowserRouter>
     </div>

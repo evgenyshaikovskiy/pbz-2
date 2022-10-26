@@ -31,6 +31,14 @@ export class AppService {
     return query;
   }
 
+  // get by id functions
+  public async getByIdFromRelation(id: number, relation: string) {
+    const query = await this.connection.query(
+      `SELECT * FROM ${relation} WHERE id='${id}'`
+    );
+    return query;
+  }
+
   // add functions
   public async addEmployee(employee: Employee) {
     const query = await this.connection.query(`
@@ -70,6 +78,18 @@ export class AppService {
     const query = await this.connection.query(
       `DELETE FROM ${relationName} WHERE id='${id}'`
     );
+    return query;
+  }
+
+  // update functions
+  public async updateEmployeeById(id: number, employee: Employee) {
+    const query = await this.connection.query(
+      `UPDATE employees
+      SET full_name='${employee.full_name}',
+          position='${employee.position}'
+      WHERE id='${id}'`
+    );
+
     return query;
   }
 

@@ -9,7 +9,6 @@ function Employees() {
   useEffect(() => {
     const result = PostService.get('http://localhost:3000/api/employees');
     result.then((values) => {
-      console.log('executeds');
       setEmployees(values.data.rows);
     });
   }, [isUpdated]);
@@ -18,7 +17,6 @@ function Employees() {
     const result = await PostService.delete(
       `http://localhost:3000/api/employees/${id}`
     );
-    console.log(result);
     setIsUpdated(!isUpdated);
   };
 
