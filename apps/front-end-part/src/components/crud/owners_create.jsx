@@ -14,20 +14,21 @@ const OwnerForm = ({ create }) => {
     // auto number plate??
   });
 
-  const addNewOwner = (e) => {
+  const addNewOwner = async (e) => {
     e.preventDefault();
+    console.log(owner);
     const newOwner = {
       ...owner,
       // id field?
     };
 
-    create(newOwner);
+    await create(newOwner);
     setOwner({
       full_name: '',
       driving_license_number: '',
       address: '',
       year_of_birth: '',
-      sex: 'Пол',
+      sex: '',
     });
   };
 

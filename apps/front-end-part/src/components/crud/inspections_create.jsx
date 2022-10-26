@@ -9,6 +9,7 @@ const InspectionsForm = ({ create }) => {
     car_plate_number: '',
     employee_full_name: '',
     inspection_result: '',
+    date: '',
   });
 
   const addNewInspection = (e) => {
@@ -22,6 +23,7 @@ const InspectionsForm = ({ create }) => {
     setInspection({
       car_plate_number: '',
       employee_full_name: '',
+      date: '',
       inspection_result: 'Результат прохождения',
     });
   };
@@ -43,6 +45,12 @@ const InspectionsForm = ({ create }) => {
           setInspection({ ...inspection, employee_full_name: e.target.value })
         }
         placeholder="ФИО сотрудника"
+      ></AppInput>
+      <AppInput
+        value={inspection.date}
+        type="text"
+        onChange={(e) => setInspection({ ...inspection, date: e.target.value })}
+        placeholder='Дата(M/D/Y)'
       ></AppInput>
       <AppSelect
         value={inspection.inspection_result}

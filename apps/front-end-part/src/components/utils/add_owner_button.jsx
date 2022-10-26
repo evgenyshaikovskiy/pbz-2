@@ -8,6 +8,7 @@ export function CreateOwnerButton() {
   const [modal, setModal] = useState(false);
 
   const createOwner = async (owner) => {
+    console.log(owner);
     const response = await PostService.post(
       'http://localhost:3000/api/owners',
       owner
