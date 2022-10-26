@@ -17,7 +17,11 @@ export class AppService {
   }
 
   public async getAllInspections() {
-    const query = await this.connection.query('SELECT * FROM inspections;');
+    const query = await this.connection.query(`
+      SELECT inspections.id, plate_number, full_name as employee_full_name, inspections.date, inspections.inspection_result FROM inspections
+      JOIN cars ON cars.id = inspections.car_id
+      JOIN employees ON employees.id = inspections.employee_id
+    `);
     return query;
   }
 
@@ -36,6 +40,15 @@ export class AppService {
     const query = await this.connection.query(
       `SELECT * FROM ${relation} WHERE id='${id}'`
     );
+    return query;
+  }
+
+  public async getByIdFromInspections(id: number) {
+    const query = await this.connection.query(`
+      SELECT inspections.id, plate_number, full_name as employee_full_name, inspections.date, inspections.inspection_result FROM inspections
+      JOIN cars ON cars.id = inspections.car_id
+      JOIN employees ON employees.id = inspections.employee_id
+      WHERE inspections.id='${id}'`);
     return query;
   }
 
@@ -69,7 +82,7 @@ export class AppService {
       INSERT INTO inspections(car_id, employee_id, inspection_result, date) VALUES(
         (SELECT id FROM cars WHERE cars.plate_number = '${inspection.car_plate_number}'),
         (SELECT id FROM employees WHERE employees.full_name = '${inspection.employee_full_name}'),
-        ${inspection.inspection_result}, ${inspection.date});`);
+        '${inspection.inspection_result}', '${inspection.date}');`);
 
     return query;
   }

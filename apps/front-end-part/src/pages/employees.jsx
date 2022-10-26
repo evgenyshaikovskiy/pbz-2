@@ -22,14 +22,16 @@ function Employees() {
 
   return (
     <div className="employees_list">
-      <h1 style={{ textAlign: 'center', padding: '10px' }}>Список сотрудников</h1>
+      <h1 style={{ textAlign: 'center', padding: '10px' }}>
+        Список сотрудников
+      </h1>
       {employees.map((value) => {
         return (
           <EmployeeItem
             employee={value}
             key={value.id}
             remove={removeEmployee}
-          ></EmployeeItem>
+          />
         );
       })}
     </div>

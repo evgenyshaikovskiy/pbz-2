@@ -24,7 +24,7 @@ const InspectionsForm = ({ create }) => {
       car_plate_number: '',
       employee_full_name: '',
       date: '',
-      inspection_result: 'Результат прохождения',
+      inspection_result: '',
     });
   };
 

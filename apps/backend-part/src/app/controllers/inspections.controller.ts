@@ -27,7 +27,7 @@ export class InspectionsController {
 
   @Get(':id')
   get(@Param() params) {
-    const res = this.appService.getByIdFromRelation(params.id, 'inspections');
+    const res = this.appService.getByIdFromInspections(params.id);
     return res;
   }
 
