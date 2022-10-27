@@ -6,7 +6,7 @@ import { Owner } from '../model/owner.model';
 export class OwnersController {
   constructor(private readonly appService: AppService) {}
   @Get()
-  getAll(@Req() request: Request) {
+  getAll() {
     // TODO: proper answers for some requests
     const res = this.appService.getAllOwners();
     // eslint-disable-next-line no-debugger

@@ -1,5 +1,4 @@
 import { Controller, Delete, Get, Param, Post, Put, Req } from '@nestjs/common';
-import { useParams } from 'react-router-dom';
 import { AppService } from '../app.service';
 import { Car } from '../model/car.model';
 

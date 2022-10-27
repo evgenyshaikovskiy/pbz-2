@@ -6,7 +6,7 @@ import { Inspection } from './model/inspection';
 import { Owner } from './model/owner.model';
 @Injectable()
 export class AppService {
-  constructor(@Inject(PG_CONNECTION) private connection: any) {
+  constructor(@Inject(PG_CONNECTION) private connection) {
     this.load();
   }
 
@@ -40,6 +40,16 @@ export class AppService {
     const query = await this.connection.query(
       `SELECT * FROM ${relation} WHERE id='${id}'`
     );
+    return query;
+  }
+
+  public async getByIdFromCars(id: number) {
+    const query = await this.connection.query(
+      `SELECT cars.brand, cars.color, cars.engine_number, cars.id, full_name AS owner_full_name, cars.plate_number FROM cars
+        JOIN owners ON owners.id = cars.owner_id
+        WHERE owners.id='${id}'`
+    );
+
     return query;
   }
 
@@ -114,7 +124,7 @@ export class AppService {
           engine_number='${car.engine_number}',
           color='${car.color}',
           brand='${car.brand}',
-          owner_id='(SELECT id FROM owners WHERE owners.full_name='${car.owner_full_name}')'
+          owner_id='${car.owner_id}'
       WHERE id='${id}'`);
 
     return query;

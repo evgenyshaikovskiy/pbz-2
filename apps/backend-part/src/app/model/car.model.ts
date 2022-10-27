@@ -4,4 +4,5 @@ export class Car {
   engine_number: string;
   owner_full_name: string;
   plate_number: string;
+  owner_id: number;
 }
