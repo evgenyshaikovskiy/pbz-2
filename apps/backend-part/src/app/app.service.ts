@@ -53,15 +53,6 @@ export class AppService {
     return query;
   }
 
-  public async getByIdFromInspections(id: number) {
-    const query = await this.connection.query(`
-      SELECT inspections.id, plate_number, full_name as employee_full_name, inspections.date, inspections.inspection_result FROM inspections
-      JOIN cars ON cars.id = inspections.car_id
-      JOIN employees ON employees.id = inspections.employee_id
-      WHERE inspections.id='${id}'`);
-    return query;
-  }
-
   // add functions
   public async addEmployee(employee: Employee) {
     const query = await this.connection.query(`
@@ -145,9 +136,9 @@ export class AppService {
 
   public async updateInspectionById(id: number, inspection: Inspection) {
     const query = await this.connection.query(`
-      UPDATE inspection
-        SET car_id='(SELECT id FROM cars WHERE cars.plate_number='${inspection.car_plate_number}')',
-        employee_id='(SELECT id FROM employees WHERE employees.full_name='${inspection.employee_full_name}')',
+      UPDATE inspections
+        SET car_id='${inspection.car_id}',
+        employee_id=${inspection.employee_id},
         date='${inspection.date}',
         inspection_result='${inspection.inspection_result}'
       WHERE id='${id}';`);

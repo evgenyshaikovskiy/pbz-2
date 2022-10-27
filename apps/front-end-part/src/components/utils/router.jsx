@@ -9,6 +9,7 @@ import Home from '../../pages/home';
 import EmployeePage from '../single-pages/employeeSinglePage';
 import OwnerPage from '../single-pages/ownerSinglePage';
 import CarPage from '../single-pages/carSinglePage';
+import InspectionPage from '../single-pages/inspectionSinglePage';
 
 function ApplicationRouter() {
   return (
@@ -40,6 +41,7 @@ function ApplicationRouter() {
           <Route path="/employees/:id" element={<EmployeePage />}></Route>
           <Route path="/owners/:id" element={<OwnerPage />}></Route>
           <Route path="/cars/:id" element={<CarPage />}></Route>
+          <Route path="/inspections/:id" element={<InspectionPage />}></Route>
         </Routes>
       </BrowserRouter>
     </div>
