@@ -124,11 +124,11 @@ export class AppService {
     const query = await this.connection.query(`
       UPDATE owners
         SET address='${owner.address}',
-        SET driving_license_number='${owner.driving_license_number}',
-        SET full_name='${owner.full_name}',
-        SET sex='${owner.sex}',
-        SET year_of_birth='${owner.year_of_birth}'
-      WHERE id='${id}'`);
+        driving_license_number='${owner.driving_license_number}',
+        full_name='${owner.full_name}',
+        sex='${owner.sex}',
+        year_of_birth='${owner.year_of_birth}'
+      WHERE id='${id}';`);
 
     return query;
   }
@@ -137,10 +137,10 @@ export class AppService {
     const query = await this.connection.query(`
       UPDATE inspection
         SET car_id='(SELECT id FROM cars WHERE cars.plate_number='${inspection.car_plate_number}')',
-        SET employee_id='(SELECT id FROM employees WHERE employees.full_name='${inspection.employee_full_name}')',
-        SET date='${inspection.date}',
-        SET inspection_result='${inspection.inspection_result}'
-      WHERE id='${id}'`);
+        employee_id='(SELECT id FROM employees WHERE employees.full_name='${inspection.employee_full_name}')',
+        date='${inspection.date}',
+        inspection_result='${inspection.inspection_result}'
+      WHERE id='${id}';`);
 
     return query;
   }

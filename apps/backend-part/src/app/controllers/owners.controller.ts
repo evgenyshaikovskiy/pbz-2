@@ -10,7 +10,6 @@ export class OwnersController {
     // TODO: proper answers for some requests
     const res = this.appService.getAllOwners();
     // eslint-disable-next-line no-debugger
-    console.log(request);
     return res;
   }
 
@@ -29,6 +28,7 @@ export class OwnersController {
   @Get(':id')
   get(@Param() params) {
     const res = this.appService.getByIdFromRelation(params.id, 'owners');
+    return res;
   }
 
   @Put(':id')

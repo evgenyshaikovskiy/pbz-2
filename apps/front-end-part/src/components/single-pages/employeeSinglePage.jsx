@@ -12,16 +12,16 @@ const EmployeePage = () => {
   const [employee, setEmployee] = useState({});
   const [isUpdated, setIsUpdated] = useState(false);
   const [visibilitySaveButton, setVisibilitySaveButton] = useState('hidden');
-  const [visibilityEditButton, setVisibilityEditButton] = useState('not');
+  const [visibilityEditButton, setVisibilityEditButton] = useState('');
   const [isUpdating, setIsUpdating] = useState(false);
 
   useEffect(() => {
-    const result = PostService.get(
-      `http://localhost:3000/api/employees/${params.id}`
-    ).then((value) => {
-      setEmployee(...value.data.rows);
-    });
-  }, [isUpdated]);
+    PostService.get(`http://localhost:3000/api/employees/${params.id}`).then(
+      (value) => {
+        setEmployee(...value.data.rows);
+      }
+    );
+  }, [isUpdated, params.id]);
 
   const removeEmployee = async () => {
     await PostService.delete(
@@ -42,7 +42,10 @@ const EmployeePage = () => {
     setVisibilitySaveButton('hidden');
     setIsUpdating(false);
 
-    await PostService.put(`http://localhost:3000/api/employees/${params.id}`, employee);
+    await PostService.put(
+      `http://localhost:3000/api/employees/${params.id}`,
+      employee
+    );
     setIsUpdated(true);
   };
 
@@ -76,7 +79,6 @@ const EmployeePage = () => {
             style={{ textAlign: 'center' }}
           ></AppInput>
         </div>
-        <div className="buttons"></div>
       </div>
       <div className="page-buttons">
         <AppButton onClick={removeEmployee}>Удалить</AppButton>

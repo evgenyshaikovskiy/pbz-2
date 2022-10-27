@@ -7,6 +7,7 @@ import Employees from '../../pages/employees';
 import '../../styles/app.css';
 import Home from '../../pages/home';
 import EmployeePage from '../single-pages/employeeSinglePage';
+import OwnerPage from '../single-pages/ownerSinglePage';
 
 function ApplicationRouter() {
   return (
@@ -36,6 +37,7 @@ function ApplicationRouter() {
           <Route path="/cars" element={<Cars />}></Route>
           <Route path="/inspections" element={<Inspections />}></Route>
           <Route path="/employees/:id" element={<EmployeePage />}></Route>
+          <Route path="/owners/:id" element={<OwnerPage />}></Route>
         </Routes>
       </BrowserRouter>
     </div>
