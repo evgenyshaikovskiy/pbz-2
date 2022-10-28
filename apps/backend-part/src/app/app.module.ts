@@ -7,6 +7,7 @@ import { CarsController } from './controllers/cars.controller';
 import { EmployeeController } from './controllers/employees.controller';
 import { InspectionsController } from './controllers/inspections.controller';
 import { OwnersController } from './controllers/owners.controller';
+import { SearchController } from './controllers/search.controller';
 
 @Module({
   imports: [DbModule],
@@ -16,6 +17,7 @@ import { OwnersController } from './controllers/owners.controller';
     EmployeeController,
     CarsController,
     InspectionsController,
+    SearchController,
   ],
   providers: [AppService],
 })

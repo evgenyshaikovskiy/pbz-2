@@ -10,6 +10,17 @@ export class AppService {
     this.load();
   }
 
+  // search functions
+  public async getCarsBetweenDates(beginDate: string, end_date: string) {
+    const query = await this.connection.query(`
+      SELECT DISTINCT cars.id, cars.plate_number, cars.engine_number, cars.color, cars.brand, cars.owner_id FROM inspections
+        JOIN cars ON cars.id = inspections.car_id
+      WHERE inspections.date BETWEEN '${beginDate}' AND '${end_date}'
+      `);
+
+    return query;
+  }
+
   // get all functions
   public async getAllEmployees() {
     const query = await this.connection.query('SELECT * FROM employees;');

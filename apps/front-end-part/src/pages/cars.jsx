@@ -18,6 +18,7 @@ function Cars() {
 
     setIsUpdated(!isUpdated);
   };
+
   return (
     <div>
       <h1 style={{ textAlign: 'center', padding: '10px' }}>

@@ -4,15 +4,17 @@ import CreateOwnerButton from '../components/utils/add_owner_button';
 import CreateEmployeesButton from '../components/utils/add_employees_button';
 import CreateInspectionButton from '../components/utils/add_inspection_button';
 import '../styles/app.css';
+import SearchCarsButton from '../components/utils/search_cars_button';
 
 function Home() {
   return (
-    <div className='home_page'>
+    <div className="home_page">
       <div className="add_btns">
         <CreateCarButton></CreateCarButton>
         <CreateOwnerButton></CreateOwnerButton>
         <CreateEmployeesButton></CreateEmployeesButton>
         <CreateInspectionButton></CreateInspectionButton>
+        <SearchCarsButton></SearchCarsButton>
       </div>
     </div>
   );
