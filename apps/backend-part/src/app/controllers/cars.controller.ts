@@ -35,4 +35,9 @@ export class CarsController {
     const car: Car = request.body as unknown as Car;
     this.appService.updateCarById(params.id, car);
   }
+
+  @Get(':id/inspections')
+  getInspections(@Param() params) {
+    return this.appService.getInspectionsByCarId(params.id);
+  }
 }

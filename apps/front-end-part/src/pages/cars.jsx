@@ -14,9 +14,7 @@ function Cars() {
   }, [isUpdated]);
 
   const removeCar = async (id) => {
-    const result = await PostService.delete(
-      `http://localhost:3000/api/cars/${id}`
-    );
+    await PostService.delete(`http://localhost:3000/api/cars/${id}`);
 
     setIsUpdated(!isUpdated);
   };

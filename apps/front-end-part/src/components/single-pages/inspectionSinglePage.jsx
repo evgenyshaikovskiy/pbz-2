@@ -48,6 +48,7 @@ const InspectionPage = () => {
     }
 
     fetchData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isUpdated, params.id]);
 
   const removeInspection = async () => {

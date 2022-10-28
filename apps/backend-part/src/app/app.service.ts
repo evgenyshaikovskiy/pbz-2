@@ -43,11 +43,12 @@ export class AppService {
     return query;
   }
 
-  public async getByIdFromCars(id: number) {
+  public async getInspectionsByCarId(id: number) {
     const query = await this.connection.query(
-      `SELECT cars.brand, cars.color, cars.engine_number, cars.id, full_name AS owner_full_name, cars.plate_number FROM cars
-        JOIN owners ON owners.id = cars.owner_id
-        WHERE owners.id='${id}'`
+      `SELECT inspections.id, plate_number, full_name as employee_full_name, inspections.date, inspections.inspection_result FROM inspections
+      JOIN cars ON cars.id = inspections.car_id
+      JOIN employees ON employees.id = inspections.employee_id
+      WHERE inspections.car_id='${id}'`
     );
 
     return query;
@@ -167,7 +168,7 @@ export class AppService {
           id SERIAL PRIMARY KEY,
           car_id INTEGER REFERENCES cars(id),
           employee_id INTEGER REFERENCES employees(id),
-          date TIMESTAMP,
+          date DATE,
           inspection_result VARCHAR(20)
         );
         `

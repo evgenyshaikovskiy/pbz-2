@@ -15,9 +15,7 @@ function Inspections() {
   }, [isUpdated]);
 
   const removeInspection = async (id) => {
-    const result = await PostService.delete(
-      `http://localhost:3000/api/inspections/${id}`
-    );
+    await PostService.delete(`http://localhost:3000/api/inspections/${id}`);
     setIsUpdated(!isUpdated);
   };
   return (
@@ -27,7 +25,13 @@ function Inspections() {
         <div>puso</div>
       ) : (
         inspections.map((value) => {
-          return <InspectionItem id={value.id} inspection={value} remove={removeInspection}/>;
+          return (
+            <InspectionItem
+              id={value.id}
+              inspection={value}
+              remove={removeInspection}
+            />
+          );
         })
       )}
     </div>

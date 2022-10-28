@@ -14,9 +14,7 @@ function Employees() {
   }, [isUpdated]);
 
   const removeEmployee = async (id) => {
-    const result = await PostService.delete(
-      `http://localhost:3000/api/employees/${id}`
-    );
+    await PostService.delete(`http://localhost:3000/api/employees/${id}`);
     setIsUpdated(!isUpdated);
   };
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import PostService from '../../api/post.service';
 import AppButton from '../button';
 import OwnerForm from '../crud/owners_create';

@@ -14,9 +14,7 @@ function Owners() {
   }, [isUpdated]);
 
   const removeOwner = async (id) => {
-    const result = await PostService.delete(
-      `http://localhost:3000/api/owners/${id}`
-    );
+    await PostService.delete(`http://localhost:3000/api/owners/${id}`);
 
     setIsUpdated(!isUpdated);
   };
