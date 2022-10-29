@@ -43,10 +43,7 @@ function ApplicationRouter() {
           <Route path="/owners/:id" element={<OwnerPage />}></Route>
           <Route path="/cars/:id" element={<CarPage />}></Route>
           <Route path="/inspections/:id" element={<InspectionPage />}></Route>
-          <Route
-            path="/search-inspections"
-            element={<CountOfCarsByDate />}
-          ></Route>
+          <Route path="/search-cars" element={<CountOfCarsByDate />}></Route>
         </Routes>
       </BrowserRouter>
     </div>

@@ -5,7 +5,7 @@ export function SearchCarsButton() {
   const router = useNavigate();
   return (
     <div>
-      <AppButton onClick={() => router(`/search-inspections`)}>
+      <AppButton onClick={() => router(`/search-cars`)}>
         Поиск автомобилей прошедших техосмотр по датам
       </AppButton>
     </div>
