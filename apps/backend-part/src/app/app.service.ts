@@ -106,7 +106,7 @@ export class AppService {
       INSERT INTO inspections(car_id, employee_id, inspection_result, inspection_date) VALUES(
         (SELECT id FROM cars WHERE cars.plate_number = '${inspection.car_plate_number}'),
         (SELECT id FROM employees WHERE employees.full_name = '${inspection.employee_full_name}'),
-        '${inspection.inspection_result}', '${inspection.date}');`);
+        '${inspection.inspection_result}', '${inspection.inspection_date}');`);
 
     return query;
   }
@@ -162,7 +162,7 @@ export class AppService {
       UPDATE inspections
         SET car_id='${inspection.car_id}',
         employee_id=${inspection.employee_id},
-        inspection_date='${inspection.date}',
+        inspection_date='${inspection.inspection_date}',
         inspection_result='${inspection.inspection_result}'
       WHERE id='${id}';`);
 
