@@ -10,7 +10,8 @@ function Inspections() {
     const result = PostService.get('http://localhost:3000/api/inspections');
     result.then((values) => {
       setInspections(values.data.rows);
-      console.log(values.data.rows);
+
+
     });
   }, [isUpdated]);
 

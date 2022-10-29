@@ -15,8 +15,19 @@ export class AppService {
     const query = await this.connection.query(`
       SELECT DISTINCT cars.id, cars.plate_number, cars.engine_number, cars.color, cars.brand, cars.owner_id FROM inspections
         JOIN cars ON cars.id = inspections.car_id
-      WHERE inspections.date BETWEEN '${beginDate}' AND '${end_date}'
+      WHERE inspections.inspection_date BETWEEN '${beginDate}' AND '${end_date}'
       `);
+
+    return query;
+  }
+
+  public async getEmployeesByDate(date: string) {
+    // ГАИ, проводивших осмотр на заданную дату: ФИО, звание сотрудника,  госномера автомобилей, которые он осматривал
+    const query = await this.connection.query(`
+    SELECT full_name, position, plate_number, inspection_date::date FROM inspections
+    JOIN cars ON cars.id = inspections.car_id
+    JOIN employees ON employees.id = inspections.employee_id
+    WHERE inspections.inspection_date::date ='${date};'`);
 
     return query;
   }
@@ -29,7 +40,7 @@ export class AppService {
 
   public async getAllInspections() {
     const query = await this.connection.query(`
-      SELECT inspections.id, plate_number, full_name as employee_full_name, inspections.date, inspections.inspection_result FROM inspections
+      SELECT inspections.id, plate_number, full_name as employee_full_name, inspections.inspection_date, inspections.inspection_result FROM inspections
       JOIN cars ON cars.id = inspections.car_id
       JOIN employees ON employees.id = inspections.employee_id
     `);
@@ -56,7 +67,7 @@ export class AppService {
 
   public async getInspectionsByCarId(id: number) {
     const query = await this.connection.query(
-      `SELECT inspections.id, plate_number, full_name as employee_full_name, inspections.date, inspections.inspection_result FROM inspections
+      `SELECT inspections.id, plate_number, full_name as employee_full_name, inspections.inspection_date, inspections.inspection_result FROM inspections
       JOIN cars ON cars.id = inspections.car_id
       JOIN employees ON employees.id = inspections.employee_id
       WHERE inspections.car_id='${id}'`
@@ -92,7 +103,7 @@ export class AppService {
 
   public async addInspection(inspection: Inspection) {
     const query = await this.connection.query(`
-      INSERT INTO inspections(car_id, employee_id, inspection_result, date) VALUES(
+      INSERT INTO inspections(car_id, employee_id, inspection_result, inspection_date) VALUES(
         (SELECT id FROM cars WHERE cars.plate_number = '${inspection.car_plate_number}'),
         (SELECT id FROM employees WHERE employees.full_name = '${inspection.employee_full_name}'),
         '${inspection.inspection_result}', '${inspection.date}');`);
@@ -151,7 +162,7 @@ export class AppService {
       UPDATE inspections
         SET car_id='${inspection.car_id}',
         employee_id=${inspection.employee_id},
-        date='${inspection.date}',
+        inspection_date='${inspection.date}',
         inspection_result='${inspection.inspection_result}'
       WHERE id='${id}';`);
 
@@ -179,7 +190,7 @@ export class AppService {
           id SERIAL PRIMARY KEY,
           car_id INTEGER REFERENCES cars(id),
           employee_id INTEGER REFERENCES employees(id),
-          date DATE,
+          inspection_date DATE,
           inspection_result VARCHAR(20)
         );
         `

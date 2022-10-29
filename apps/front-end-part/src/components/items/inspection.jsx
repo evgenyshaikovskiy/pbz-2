@@ -8,7 +8,7 @@ const InspectionItem = (props) => {
     <div className="item_container">
       <div className="item_content">
         <strong className="item_header">
-          {props.inspection.id}. Дата: {props.inspection.date}, Результат:{props.inspection.inspection_result}
+          {props.inspection.id}. Дата: {props.inspection.inspection_date.slice(0, 10)}, Результат:{props.inspection.inspection_result}
         </strong>
         <p className="item_description">
           Номер авто: {props.inspection.plate_number}

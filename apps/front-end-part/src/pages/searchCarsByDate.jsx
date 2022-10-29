@@ -16,10 +16,10 @@ function CountOfCarsByDate() {
   const removeCar = async (id) => {
     await PostService.delete(`http://localhost:3000/api/cars/${id}`);
     setModal(false);
-    loadInspection();
+    loadCars();
   };
 
-  const loadInspection = async () => {
+  const loadCars = async () => {
     await PostService.post(`http://localhost:3000/api/search/cars`, {
       begin_date: beginDate,
       end_date: endDate,
@@ -52,7 +52,7 @@ function CountOfCarsByDate() {
           onChange={(e) => setEndDate(e.target.value)}
         ></AppInput>
 
-        <AppButton onClick={() => loadInspection()}>Найти</AppButton>
+        <AppButton onClick={() => loadCars()}>Найти</AppButton>
         <AppModal visible={modal} setVisible={setModal}>
           <h1>
             Кол-во автомобилей за заданный промежуток времени: {cars.length}

@@ -5,6 +5,7 @@ import CreateEmployeesButton from '../components/utils/add_employees_button';
 import CreateInspectionButton from '../components/utils/add_inspection_button';
 import '../styles/app.css';
 import SearchCarsButton from '../components/utils/search_cars_button';
+import SearchEmployeesButton from '../components/utils/search_employees_button';
 
 function Home() {
   return (
@@ -15,6 +16,7 @@ function Home() {
         <CreateEmployeesButton></CreateEmployeesButton>
         <CreateInspectionButton></CreateInspectionButton>
         <SearchCarsButton></SearchCarsButton>
+        <SearchEmployeesButton></SearchEmployeesButton>
       </div>
     </div>
   );

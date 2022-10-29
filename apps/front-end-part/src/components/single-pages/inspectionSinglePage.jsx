@@ -87,7 +87,7 @@ const InspectionPage = () => {
         <div>
           <p style={{ textAlign: 'center' }}>Дата проведения:</p>
           <AppInput
-            value={inspection.date}
+            value={inspection.inspection_date}
             type="text"
             placeholder="Дата проведения"
             onChange={(e) =>

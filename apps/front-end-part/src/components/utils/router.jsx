@@ -11,6 +11,7 @@ import OwnerPage from '../single-pages/ownerSinglePage';
 import CarPage from '../single-pages/carSinglePage';
 import InspectionPage from '../single-pages/inspectionSinglePage';
 import CountOfCarsByDate from '../../pages/searchCarsByDate';
+import SearchEmployeesByDate from '../../pages/searchEmployeesByDate';
 
 function ApplicationRouter() {
   return (
@@ -44,6 +45,10 @@ function ApplicationRouter() {
           <Route path="/cars/:id" element={<CarPage />}></Route>
           <Route path="/inspections/:id" element={<InspectionPage />}></Route>
           <Route path="/search-cars" element={<CountOfCarsByDate />}></Route>
+          <Route
+            path="/search-employees"
+            element={<SearchEmployeesByDate />}
+          ></Route>
         </Routes>
       </BrowserRouter>
     </div>
