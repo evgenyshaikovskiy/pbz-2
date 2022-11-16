@@ -102,17 +102,20 @@ export class AppService {
   }
 
   public async addInspection(inspection: Inspection) {
-    // add this query later to avoid adding extra inspection
-    /* WITH required_id AS (
-       SELECT id FROM employees
-       WHERE full_name = ${inspection.employee_full_name}
-       )
+    const supQuery = await this.connection.query(`
       SELECT COUNT(*) FROM inspections
-      WHERE employee_id = required_id AND (inspection_date BETWEEN (inspection_date - 1) AND (inspection_date + 1)
-    */
-    
+      WHERE employee_id = (SELECT id FROM employees WHERE full_name = '${inspection.employee_full_name}')
+      AND (inspection_date BETWEEN (inspection_date - 1) AND (inspection_date + 1))`);
+
+    const [data] = supQuery.rows;
+
+    if ((data.count as number) >= 10) {
+      console.log('error');
+      return null;
+    }
+
     // if query above return > 10 then adding is not possible
-    // also: 
+    // also:
     // sudo -u postgres psql
     // ALTER USER yauheni WITH password 'password123';
     // sudo -u postgres createdb pbz_2_db --owner=yauheni
